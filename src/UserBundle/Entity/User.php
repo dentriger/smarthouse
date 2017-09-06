@@ -57,9 +57,9 @@ class User implements AdvancedUserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="array")
      */
-    private $roles = array();
+    private $roles;
 
 
     /**
@@ -70,7 +70,7 @@ class User implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
-        $this->roles = array('ROLE_ADMIN');
+        $this->roles = array('ROLE_USER','ROLE_ADMIN');
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -187,11 +187,11 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getRoles()
     {
-        return $this->roles = array('ROLE_ADMIN');
+        return $this->roles ;
     }
 
 
-    public function setRoles(array $roles)
+    public function setRoles($roles)
     {
         $this->roles = ['ROLE_USER'];
 
