@@ -1,0 +1,29 @@
+category_crud:
+    path:     /crud
+    defaults: { _controller: "CatalogBundle:Category:crudCategory" }
+    methods:  [GET, POST]
+
+category_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "CatalogBundle:Category:removeCategory" }
+    methods:  [GET, POST]
+
+category_create:
+    path:     /create
+    defaults: { _controller: "CatalogBundle:Category:createCategory" }
+    methods:  [GET, POST]
+
+category_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CatalogBundle:Category:editCategory" }
+    methods:  [GET, POST]
+
+products_all:
+    path:     /all
+    defaults: { _controller: "CatalogBundle:Category:getAllProducts" }
+    methods:  GET
+
+products_by_category:
+    path:     /{id}
+    defaults: { _controller: "CatalogBundle:Category:getProductsByCategory" }
+    methods:  GET

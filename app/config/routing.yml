@@ -1,0 +1,24 @@
+admin:
+    resource: "@AdminBundle/Controller/"
+    prefix:   /
+    type: annotation
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user_registration:
+    path:     /register
+    defaults: { _controller: UserBundle:Registration:register }
+
+catalog:
+    resource: "@CatalogBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+logout:
+    path: /logout

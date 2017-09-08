@@ -1,0 +1,34 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    gedmo.listener.tree:
+        class: Gedmo\Tree\TreeListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    app.product_serializer:
+        class: CatalogBundle\Service\ProductSerializer
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.form.type.category:
+        class: CatalogBundle\Form\Type\CategoryType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }
+
+    app.form.type.edit_category:
+        class: CatalogBundle\Form\Type\EditCategoryType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }
+
+    app.category_menu_generator:
+        class: CatalogBundle\Service\CategoryMenuGenerator
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.category_paginator_generator:
+        class: CatalogBundle\Service\PaginatorGenerator
+        arguments: ["@doctrine.orm.entity_manager"]

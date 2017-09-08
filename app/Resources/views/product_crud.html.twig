@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/catalog/css/css.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div style="height: 100px;"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <a href="{{ path('product_create') }}" class="btn btn-lg btn-success btn-block" style="margin-bottom: 15px">
+                    Add Product
+                </a>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row">
+            <div id="grid-table"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {#<script src="{{ asset('bundles/catalog/js/grid_plugin.js') }}"></script>#}
+    <script>
+        $('#grid-table').gridPlugin({
+            bug: '/product/',
+            rootURL: 'http://localhost:8000',
+            apiURL: 'http://localhost:8000/api/products',
+            sortableColumn: 'id',
+            itemsPerPage: 8,
+            page: 1,
+            direction: 0
+        });
+    </script>
+{% endblock %}

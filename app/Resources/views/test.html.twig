@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/catalog/css/menu/menu.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="testclass">
+    <div id='cssmenu'>
+        {{ htmlTree | raw }}
+    </div>
+</div>
+</div>
+    {% if pagination is defined %}
+        <div>
+            {% for article in pagination %}
+                <div class="col-md-3">
+                    <div class="thumbnail" style="overflow: hidden;height: 400px">
+                        <img src="{{ relative_path('/uploads/images/') }}{{ article.image }}" alt="...">
+                        <div class="caption">
+                            <h3>{{ article.name }}</h3>
+                            <p>{{ article.description | slice(0,50) }}...</p>
+                            <p><a href="/product/{{ article.id }}" class="btn btn-primary" role="button">View</a> </p>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <h1 style="text-align: center">Not found products by this category!</h1>
+            {% endfor %}
+        </div>
+        <div class="navigation" style="padding-left: 20px;width: 100%;float: right;">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
