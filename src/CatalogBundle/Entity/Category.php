@@ -300,7 +300,7 @@ class Category
         return $this->products;
     }
 
-    public function getDataToForm()
+    public function getCategoryDataToForm()
     {
         if (is_null($this->getParent())) {
             $parentId = null;

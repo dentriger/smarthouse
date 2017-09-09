@@ -63,6 +63,7 @@ doctrine:
             default:
                 mappings:
                     CatalogBundle: ~
+                    UserBundle: ~
                     gedmo_translatable:
                         type: annotation
                         prefix: Gedmo\Translatable\Entity

@@ -3,7 +3,6 @@ namespace CatalogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use CatalogBundle\Form\Product\SubmitProductType;
 
 class ProductController extends Controller
@@ -15,10 +14,13 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $em->getRepository('CatalogBundle:Product')->insertDataFromForm($form);
+            $em->getRepository('CatalogBundle:Product')->save(
+                $this
+                ->get('app.product_generator')
+                ->createProduct($form)
+            );
             return $this->redirectToRoute('product_crud');
         }
-
         return $this->render('add_product.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -35,7 +37,11 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $em->getRepository('CatalogBundle:Product')->updateDataFromForm($form, $editable_product);
+            $em->getRepository('CatalogBundle:Product')->save(
+                $this
+                    ->get('app.product_generator')
+                    ->updateProduct($form, $editable_product)
+            );
             return $this->redirectToRoute('product_crud');
         }
 
@@ -47,8 +53,7 @@ class ProductController extends Controller
     public function getProductByIdAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('CatalogBundle:Product');
-        $product = $repo->findOneBy(array('id' => $id));
+        $product = $em->getRepository('CatalogBundle:Product')->findOneBy(array('id' => $id));
         $htmlTree = $this->get('app.category_menu_generator')->getMenu();
         return $this->render('single_product.html.twig', compact('htmlTree', 'product'));
     }
@@ -56,15 +61,10 @@ class ProductController extends Controller
     public function removeProductAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $prodRepo = $em->getRepository('CatalogBundle:Product');
-        $product = $prodRepo->findOneBy(array('id' => $id));
-        if ($product === null) {
-            return new Response('0');
-        } else {
-            $em->remove($product);
-            $em->flush();
-            return new Response('1');
-        }
+        $em->getRepository('CatalogBundle:Product')->remove(
+            $em->getRepository('CatalogBundle:Product')->findOneBy(array('id' => $id))
+        );
+        return $this->redirectToRoute('product_crud');
     }
 
     public function gridProductsAction()

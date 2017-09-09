@@ -1,7 +1,6 @@
 <?php
 namespace CatalogBundle\Controller;
 
-use CatalogBundle\Entity\Category;
 use CatalogBundle\Form\Category\SubmitCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,20 +11,14 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(SubmitCategoryType::class);
-        $categoryRepo = $em->getRepository('CatalogBundle:Category');
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $category = new Category();
-            if (!is_null($form->get('parent_category')->getData())) {
-                $category->setParent(
-                    $categoryRepo->findOneBy(array('id' => $form->get('parent_category')->getData()))
-                );
-            }
-            $category->setTitle($form->get('title')->getData());
-            $category->setStateFlag($form->get('state_flag')->getData());
-            $em->persist($category);
-            $em->flush();
+            $em->getRepository('CatalogBundle:Category')->save(
+                $this
+                    ->get('app.category_generator')
+                    ->createCategory($form)
+            );
             return $this->redirectToRoute('category_crud');
         }
 
@@ -37,24 +30,19 @@ class CategoryController extends Controller
     public function editCategoryAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $categoryRepo = $em->getRepository('CatalogBundle:Category');
-        $category =  $categoryRepo->findOneBy(array('id' => $id));
-
+        $editable_category = $em
+            ->getRepository('CatalogBundle:Category')
+            ->findOneBy(array('id' => $id));
         $form = $this->createForm(SubmitCategoryType::class);
-        $form->setData($category->getDataToForm());
-
+        $form->setData($editable_category->getCategoryDataToForm());
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            if (!is_null($form->get('parent_category')->getData())) {
-                $category->setParent(
-                    $categoryRepo->findOneBy(array('id' => $form->get('parent_category')->getData()))
-                );
-            }
-            $category->setTitle($form->get('title')->getData());
-            $category->setStateFlag($form->get('state_flag')->getData());
-            $em->persist($category);
-            $em->flush();
+            $em->getRepository('CatalogBundle:Category')->save(
+                $this
+                    ->get('app.category_generator')
+                    ->updateCategory($form, $editable_category)
+            );
             return $this->redirectToRoute('category_crud');
         }
 
@@ -116,9 +104,9 @@ class CategoryController extends Controller
     public function removeCategoryAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $categoryRepo = $em->getRepository('CatalogBundle:Category');
-        $em->remove($categoryRepo->findOneBy(array('id' => $id)));
-        $em->flush();
+        $em->getRepository('CatalogBundle:Category')->remove(
+            $em->getRepository('CatalogBundle:Category')->findOneBy(array('id' => $id))
+        );
         return $this->redirectToRoute('category_crud');
     }
 }

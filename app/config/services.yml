@@ -32,3 +32,12 @@ services:
     app.category_paginator_generator:
         class: CatalogBundle\Service\PaginatorGenerator
         arguments: ["@doctrine.orm.entity_manager"]
+
+    app.product_generator:
+        class: CatalogBundle\Service\ProductGenerator
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    app.category_generator:
+        class: CatalogBundle\Service\CategoryGenerator
+        arguments: ["@doctrine.orm.entity_manager"]
+
