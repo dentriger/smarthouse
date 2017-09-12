@@ -20,27 +20,27 @@ class ProductRepository extends EntityRepository
         }
     }
 
-//    public function getByPage($page, $per_page, $ordered_by, $direction)
-//    {
-//        if ($direction) {
-//            $directionDQL = 'ASC';
-//        } else {
-//            $directionDQL = 'DESC';
-//        }
-//
-//        $products = $this->_em
-//            ->createQueryBuilder()
-//            ->select('p')
-//            ->from('CatalogBundle:Product', 'p')
-//            ->orderBy('p.' . $ordered_by, $directionDQL)
-//            ->setFirstResult(($page-1)*$per_page)
-//            ->setMaxResults($per_page)
-//            ->getQuery()
-//            ->getResult();
-//
-//        return $products;
-//    }
-//
+    public function getByPage($page, $per_page, $ordered_by, $direction)
+    {
+        if ($direction) {
+            $directionDQL = 'ASC';
+        } else {
+            $directionDQL = 'DESC';
+        }
+
+        $products = $this->_em
+            ->createQueryBuilder()
+            ->select('p')
+            ->from('CatalogBundle:Product', 'p')
+            ->orderBy('p.' . $ordered_by, $directionDQL)
+            ->setFirstResult(($page-1)*$per_page)
+            ->setMaxResults($per_page)
+            ->getQuery()
+            ->getResult();
+
+        return $products;
+    }
+
 //    public function getByCategory($category_id)
 //    {
 //

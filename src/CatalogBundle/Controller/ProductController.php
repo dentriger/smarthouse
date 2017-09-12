@@ -71,4 +71,23 @@ class ProductController extends Controller
     {
         return $this->render('product_crud.html.twig');
     }
+
+    public function getProductsAjaxAction(Request $request)
+    {
+        $page = $request->get('page') ? $request->get('page') : 1;
+        $per_page = $request->get('per_page') ? $request->get('per_page') : 5;
+        $ordered_by = $request->get('ordered_by') ? $request->get('ordered_by') : 'id';
+        $direction = $request->get('direction') ? $request->get('direction') : 0;
+
+        $result = $this
+            ->get('app.product_serializer')
+            ->serializeProducts(
+                $page,
+                $per_page,
+                $ordered_by,
+                $direction
+            );
+
+        return $result;
+    }
 }

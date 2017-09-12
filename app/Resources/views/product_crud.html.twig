@@ -24,14 +24,13 @@
 {% endblock %}
 
 {% block javascripts %}
-    {#<script src="{{ asset('bundles/catalog/js/grid_plugin.js') }}"></script>#}
     <script>
         $('#grid-table').gridPlugin({
             bug: '/product/',
             rootURL: 'http://localhost:8000',
-            apiURL: 'http://localhost:8000/api/products',
+            apiURL: 'http://localhost:8000/product/ajax',
             sortableColumn: 'id',
-            itemsPerPage: 8,
+            itemsPerPage: 5,
             page: 1,
             direction: 0
         });

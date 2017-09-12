@@ -18,6 +18,10 @@ product_remove:
     defaults: { _controller: "CatalogBundle:Product:removeProduct" }
     methods:  [GET, POST]
 
+product_ajax:
+    path:     /ajax
+    defaults: { _controller: "CatalogBundle:Product:getProductsAjax" }
+
 product_by_id:
     path:     /{id}
     defaults: { _controller: "CatalogBundle:Product:getProductById" }
