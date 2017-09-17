@@ -3,6 +3,7 @@ namespace CatalogBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use CatalogBundle\Entity\Product;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductRepository extends EntityRepository
 {
@@ -46,5 +47,15 @@ class ProductRepository extends EntityRepository
         }
 
         return $products;
+    }
+
+    public function getCount()
+    {
+        return $this->_em
+            ->createQueryBuilder()
+            ->select('COUNT(p)')
+            ->from('CatalogBundle:Product', 'p')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

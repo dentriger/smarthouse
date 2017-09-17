@@ -22,6 +22,10 @@ product_ajax:
     path:     /ajax
     defaults: { _controller: "CatalogBundle:Product:getProductsAjax" }
 
+product_count:
+    path:     /ajax/count
+    defaults: { _controller: "CatalogBundle:Product:getCount" }
+
 product_by_id:
     path:     /{id}
     defaults: { _controller: "CatalogBundle:Product:getProductById" }

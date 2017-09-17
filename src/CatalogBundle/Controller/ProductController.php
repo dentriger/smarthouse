@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use CatalogBundle\Form\Product\SubmitProductType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProductController extends Controller
 {
@@ -94,5 +95,14 @@ class ProductController extends Controller
             );
 
         return $result;
+    }
+
+    public function getCountAction()
+    {
+        $result = $this->getDoctrine()->getManager()
+            ->getRepository('CatalogBundle:Product')
+            ->getCount();
+
+        return new JsonResponse(array('count' => $result));
     }
 }
