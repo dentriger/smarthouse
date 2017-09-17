@@ -60,7 +60,7 @@ class CategoryController extends Controller
             ->getPaginator($request, $paginator, 'all', $per_page);
 
         $htmlTree = $this->get('app.category_menu_generator')->getMenu();
-        return $this->render('test.html.twig', compact('htmlTree', 'id', 'pagination'));
+        return $this->render('test.html.twig', compact('htmlTree', 'pagination'));
     }
 
     public function getProductsByCategoryAction(Request $request, $id)
@@ -72,7 +72,7 @@ class CategoryController extends Controller
             ->getPaginator($request, $paginator, $id, $per_page);
 
         $htmlTree = $this->get('app.category_menu_generator')->getMenu();
-        return $this->render('test.html.twig', compact('htmlTree', 'id', 'pagination'));
+        return $this->render('test.html.twig', compact('htmlTree', 'pagination'));
     }
 
     public function crudCategoryAction()

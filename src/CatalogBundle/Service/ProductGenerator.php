@@ -17,7 +17,7 @@ class ProductGenerator
 
     public function createProduct(Form $form)
     {
-        $fileName = $form->get('image')->getData();
+        $file = $form->get('image')->getData();
         $now = new\DateTime('now');
         $product = new Product();
         $product->setName($form->get('name')->getData());
@@ -33,7 +33,7 @@ class ProductGenerator
         $product->setSku($form->get('sku')->getData());
         $product->setCreationTime($now);
         $product->setLastModification($now);
-        $product->setImage($fileName);
+        $product->setImage($file);
         return $product;
     }
 

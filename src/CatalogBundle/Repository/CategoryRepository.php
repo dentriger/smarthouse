@@ -21,6 +21,7 @@ class CategoryRepository extends NestedTreeRepository
             $this->_em->clear();
         }
     }
+
     public function getAllByIdNameLvl()
     {
         return $this->_em->createQueryBuilder()

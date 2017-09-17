@@ -21,13 +21,17 @@ class ProductSerializer
      * @param $per_page
      * @param $ordered_by
      * @param $direction
+     * @param $filtered_by
+     * @param $column
      * @return Response
      */
     public function serializeProducts(
         $page,
         $per_page,
         $ordered_by,
-        $direction
+        $direction,
+        $filtered_by,
+        $column
     ) {
 
         $encoder = new JsonEncoder();
@@ -41,6 +45,7 @@ class ProductSerializer
         $normalizer->setIgnoredAttributes([
             'creationTime',
             'lastModification',
+            'description',
             'image',
             'parent',
             'children',
@@ -52,7 +57,7 @@ class ProductSerializer
 
         $products = $this->em
             ->getRepository('CatalogBundle:Product')
-            ->getByPage($page, $per_page, $ordered_by, $direction);
+            ->getByPage($page, $per_page, $ordered_by, $direction, $filtered_by, $column);
         $response = new Response($serializer->serialize($products, 'json'));
         $response->headers->set('Content-Type', 'application/vnd.api+json');
 
