@@ -2,6 +2,7 @@
 namespace CatalogBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -38,13 +39,13 @@ class ProductSerializer
         $normalizer = new ObjectNormalizer();
 
         $normalizer->setCircularReferenceHandler(function ($object) {
-            return $object->getName();
+            return $object->getId();
         });
 
         $normalizer->setCircularReferenceLimit(0);
         $normalizer->setIgnoredAttributes([
-            'creationTime',
-            'lastModification',
+//            'creationTime',
+//            'lastModification',
             'description',
             'image',
             'parent',

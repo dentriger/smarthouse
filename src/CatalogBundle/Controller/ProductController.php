@@ -97,11 +97,13 @@ class ProductController extends Controller
         return $result;
     }
 
-    public function getCountAction()
+    public function getCountAction(Request $request)
     {
+        $filtered_by = $request->get('filtered_by') ? $request->get('filtered_by') : 'all';
+        $column = $request->get('column') ? $request->get('column') : 1;
         $result = $this->getDoctrine()->getManager()
             ->getRepository('CatalogBundle:Product')
-            ->getCount();
+            ->getCount($filtered_by, $column);
 
         return new JsonResponse(array('count' => $result));
     }

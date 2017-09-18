@@ -3,7 +3,6 @@ namespace CatalogBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use CatalogBundle\Entity\Product;
-use Symfony\Component\HttpFoundation\Response;
 
 class ProductRepository extends EntityRepository
 {
@@ -29,7 +28,7 @@ class ProductRepository extends EntityRepository
                 ->select('p')
                 ->from('CatalogBundle:Product', 'p')
                 ->orderBy('p.' . $ordered_by, $direction)
-                ->where('p.' . $filtered_by . '=' . $column)
+                ->where('p.' . $filtered_by . '= :column')->setParameter(":column", $column)
                 ->setFirstResult(($page - 1) * $per_page)
                 ->setMaxResults($per_page)
                 ->getQuery()
@@ -49,13 +48,24 @@ class ProductRepository extends EntityRepository
         return $products;
     }
 
-    public function getCount()
+    public function getCount($filtered_by, $column)
     {
-        return $this->_em
-            ->createQueryBuilder()
-            ->select('COUNT(p)')
-            ->from('CatalogBundle:Product', 'p')
-            ->getQuery()
-            ->getSingleScalarResult();
+        if ($filtered_by !== 'all') {
+            $result = $this->_em
+                ->createQueryBuilder()
+                ->select('COUNT(p)')
+                ->from('CatalogBundle:Product', 'p')
+                ->where('p.' . $filtered_by . '= :column')->setParameter(":column", $column)
+                ->getQuery()
+                ->getSingleScalarResult();
+        }else{
+            $result = $this->_em
+                ->createQueryBuilder()
+                ->select('COUNT(p)')
+                ->from('CatalogBundle:Product', 'p')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+        return $result;
     }
 }
