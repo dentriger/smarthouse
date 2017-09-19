@@ -46,14 +46,14 @@ class Product
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_time", type="datetime")
+     * @ORM\Column(name="creation_time", type="string")
      */
     private $creationTime;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_modification", type="datetime")
+     * @ORM\Column(name="last_modification", type="string")
      */
     private $lastModification;
 
@@ -138,7 +138,7 @@ class Product
     /**
      * Set creationTime
      *
-     * @param \DateTime $creationTime
+     * @param string $creationTime
      *
      * @return Product
      */
@@ -152,7 +152,7 @@ class Product
     /**
      * Get creationTime
      *
-     * @return \DateTime
+     * @return string
      */
     public function getCreationTime()
     {
@@ -162,7 +162,7 @@ class Product
     /**
      * Set lastModification
      *
-     * @param \DateTime $lastModification
+     * @param string $lastModification
      *
      * @return Product
      */
@@ -176,7 +176,7 @@ class Product
     /**
      * Get lastModification
      *
-     * @return \DateTime
+     * @return string
      */
     public function getLastModification()
     {

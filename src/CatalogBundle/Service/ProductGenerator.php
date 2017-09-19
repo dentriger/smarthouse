@@ -31,8 +31,8 @@ class ProductGenerator
 
         $product->setDescription($form->get('description')->getData());
         $product->setSku($form->get('sku')->getData());
-        $product->setCreationTime($now);
-        $product->setLastModification($now);
+        $product->setCreationTime($now->format('Y-m-d H:i:s'));
+        $product->setLastModification($now->format('Y-m-d H:i:s'));
         $product->setImage($file);
         return $product;
     }
@@ -56,7 +56,7 @@ class ProductGenerator
 
         $product->setDescription($form->get('description')->getData());
         $product->setSku($form->get('sku')->getData());
-        $product->setLastModification($now);
+        $product->setLastModification($now->format('Y-m-d H:i:s'));
         return $product;
     }
 }
