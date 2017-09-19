@@ -4,6 +4,7 @@ namespace CatalogBundle\Controller;
 use CatalogBundle\Form\Category\SubmitCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use CatalogBundle\Repository\ProductRepository;
 
 class CategoryController extends Controller
 {
@@ -87,10 +88,8 @@ class CategoryController extends Controller
             'childClose' => '</li>',
             'nodeDecorator' => function ($node) {
                 return '<a href="/category/' . $node['id'] . '">' . $node['title'] . '</a>
-                <a href="/category/' . $node['id'] .
-                '/edit"  class="btn btn-sm btn-primary">edit</a>
-                <a href="/category/' . $node['id'] .
-                '/remove" class="btn btn-sm btn-danger">delete</a>';
+                <a href="/category/' . $node['id'] . '/edit"  class="btn btn-sm btn-primary">edit</a>
+                <a href="/category/' . $node['id'] . '/remove" class="btn btn-sm btn-danger">delete</a>';
             }
         );
         $htmlTree = $repo->childrenHierarchy(
@@ -104,6 +103,7 @@ class CategoryController extends Controller
     public function removeCategoryAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $em->getRepository('CatalogBundle:Product')->removeByCategory($id);
         $em->getRepository('CatalogBundle:Category')->remove(
             $em->getRepository('CatalogBundle:Category')->findOneBy(array('id' => $id))
         );

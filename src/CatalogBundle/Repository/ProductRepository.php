@@ -20,6 +20,27 @@ class ProductRepository extends EntityRepository
         }
     }
 
+    public function removeByCategory($id)
+    {
+        $products = $this->getByCategoryId($id);
+        foreach ($products as $product) {
+            $this->_em->remove($product);
+        }
+        $this->_em->flush();
+    }
+
+    public function getByCategoryId($id)
+    {
+        $products = $this->_em
+            ->createQueryBuilder()
+            ->select('p')
+            ->from('CatalogBundle:Product', 'p')
+            ->where('p.category=' . $id)
+            ->getQuery()
+            ->getResult();
+        return $products;
+    }
+
     public function getByPage($page, $per_page, $ordered_by, $direction, $filtered_by, $column)
     {
         if ($filtered_by !== 'all') {
