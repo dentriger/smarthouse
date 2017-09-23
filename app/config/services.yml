@@ -25,6 +25,12 @@ services:
         tags:
             - { name: form.type }
 
+    app.form.type.product:
+        class: CatalogBundle\Form\Type\ProductType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }
+
     app.category_menu_generator:
         class: CatalogBundle\Service\CategoryMenuGenerator
         arguments: ["@doctrine.orm.entity_manager"]

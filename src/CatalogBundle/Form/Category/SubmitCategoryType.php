@@ -32,6 +32,7 @@ class SubmitCategoryType extends AbstractType
                 ],
                 'required' => false,
                 'empty_data' => false,
+                'data' => false,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Submit',

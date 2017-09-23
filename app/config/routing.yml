@@ -13,8 +13,9 @@ user_registration:
     defaults: { _controller: UserBundle:Registration:register }
 
 catalog:
-    resource: "@CatalogBundle/Resources/config/routing.yml"
+    resource: "@CatalogBundle/Controller"
     prefix:   /
+    type: annotation
 
 app:
     resource: '@AppBundle/Controller/'

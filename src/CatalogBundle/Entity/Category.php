@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="categories",indexes={
  *     @ORM\Index(name="title", columns={"title"}),
  *     @ORM\Index(name="state_flag", columns={"state_flag"})})
- *
  * @ORM\Entity(repositoryClass="CatalogBundle\Repository\CategoryRepository")
  */
 class Category
@@ -33,7 +32,7 @@ class Category
     /**
      * @ORM\Column(name="state_flag", type="boolean")
      */
-    private $state_flag = null;
+    private $stateFlag = null;
 
 
     /**
@@ -251,7 +250,7 @@ class Category
      */
     public function setStateFlag($stateFlag)
     {
-        $this->state_flag = $stateFlag;
+        $this->stateFlag = $stateFlag;
 
         return $this;
     }
@@ -263,7 +262,7 @@ class Category
      */
     public function getStateFlag()
     {
-        return $this->state_flag;
+        return $this->stateFlag;
     }
 
     /**
@@ -278,16 +277,6 @@ class Category
         $this->products[] = $product;
 
         return $this;
-    }
-
-    /**
-     * Remove product
-     *
-     * @param \CatalogBundle\Entity\Product $product
-     */
-    public function removeProduct(\CatalogBundle\Entity\Product $product)
-    {
-        $this->products->removeElement($product);
     }
 
     /**

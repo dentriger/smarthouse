@@ -5,6 +5,7 @@ namespace CatalogBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Form;
 use CatalogBundle\Entity\Product;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ProductGenerator
 {
@@ -17,11 +18,28 @@ class ProductGenerator
 
     public function createProduct(Form $form)
     {
-        $file = $form->get('image')->getData();
+        $fileName = $form->get('image')->getData();
+        $file = md5(uniqid()).'.'.$fileName->guessExtension();
+
+        $fileName->move(
+            'uploads/images',
+            $file
+        );
         $now = new\DateTime('now');
         $product = new Product();
+
+//        $similar_product_id = $form->get('similar_products')->getData();
+//        if($similar_product_id!==NULL) {
+//            $similar_product = $this->em
+//                ->getRepository('CatalogBundle:Product')
+//                ->find($similar_product_id));
+//            $product->addSimilarProduct($similar_product);
+//            $this->em->getRepository('CatalogBundle:Product')->save($similar_product);
+//        }
+
         $product->setName($form->get('name')->getData());
-        $product->setStateFlag($form->get('state_flag')->getData());
+        if (!$form->get('state_flag')->getData()) $product->setStateFlag(0);
+        else $product->setStateFlag(1);
 
         $product->setCategory(
             $this->em
@@ -41,11 +59,15 @@ class ProductGenerator
     {
         if (!is_null($form->get('image')->getData())) {
             $fileName = $form->get('image')->getData();
-            $product->setImage($fileName);
+            $file = md5(uniqid()).'.'.$fileName->guessExtension();
+            $fileName->move(
+                'uploads/images',
+                $file
+            );
+            $product->setImage($file);
         }
         $now = new\DateTime('now');
-        $product
-            ->setName($form->get('name')->getData());
+        $product->setName($form->get('name')->getData());
         $product->setStateFlag($form->get('state_flag')->getData());
 
         $product->setCategory(
@@ -58,5 +80,11 @@ class ProductGenerator
         $product->setSku($form->get('sku')->getData());
         $product->setLastModification($now->format('Y-m-d H:i:s'));
         return $product;
+    }
+
+    public function removeImage($image)
+    {
+        $fs = new Filesystem();
+        $fs->remove(array('file', 'uploads/images/'.$image));
     }
 }

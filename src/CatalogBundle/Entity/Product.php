@@ -13,13 +13,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Product
 {
-
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
-    
+
     /**
      * @var int
      *
@@ -28,6 +27,17 @@ class Product
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+//    /**
+//     * @ORM\Column(name="similar_products", type="array")
+//     * @ORM\ManyToMany(targetEntity="Product", cascade={"persist", "remove"})
+//     * @ORM\JoinTable(name="similar_products",
+//     *     joinColumns={@ORM\JoinColumn(name="product_a_id", referencedColumnName="id")},
+//     *     inverseJoinColumns={@ORM\JoinColumn(name="product_b_id", referencedColumnName="id")}
+//     * )
+//     * @var \Doctrine\Common\Collections\ArrayCollection
+//     */
+//    private $similar_products;
 
     /**
      * @var string
@@ -289,4 +299,44 @@ class Product
             'category' => $this->getCategory()->getId(),
         ];
     }
+
+//    /**
+//     * Constructor.
+//     */
+//    public function __construct()
+//    {
+//        $this->similar_products = new \Doctrine\Common\Collections\ArrayCollection();
+//    }
+//
+//    /**
+//     * @return array
+//     */
+//    public function getSimilarProducts()
+//    {
+//        return $this->similar_products->toArray();
+//    }
+//
+//    /**
+//     * @param  Product $product
+//     * @return void
+//     */
+//    public function addSimilarProduct(Product $product)
+//    {
+//        if (!$this->similar_products->contains($product)) {
+//            $this->similar_products->add($product);
+//            $product->addSimilarProduct($this);
+//        }
+//    }
+//
+//    /**
+//     * @param  Product $product
+//     * @return void
+//     */
+//    public function removeSimilarProduct(Product $product)
+//    {
+//        if ($this->similar_products->contains($product)) {
+//            $this->similar_products->removeElement($product);
+//            $product->removeSimilarProduct($this);
+//        }
+//    }
 }

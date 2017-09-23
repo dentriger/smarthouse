@@ -48,7 +48,12 @@ class SubmitProductType extends AbstractType
                     'style' => 'margin-bottom:15px'
                 ]
             ])
-
+//            ->add('similar_products', ProductType::class, [
+//                'attr' => [
+//                    'class' => 'form-control',
+//                    'style' => 'margin-bottom:15px'
+//                ]
+//            ])
             ->add('state_flag', CheckboxType::class, [
                 'attr' => [
                     'class' => 'checkbox-inline',
@@ -57,7 +62,6 @@ class SubmitProductType extends AbstractType
                 'required' => false,
                 'empty_data' => false,
             ])
-
             ->add('save', SubmitType::class, [
                 'label' => 'Submit',
                 'attr' => [

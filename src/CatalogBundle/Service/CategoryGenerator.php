@@ -22,11 +22,12 @@ class CategoryGenerator
             $category->setParent(
                 $this->em
                     ->getRepository('CatalogBundle:Category')
-                    ->findOneBy(array('id' => $form->get('parent_category')->getData()))
+                    ->find($form->get('parent_category')->getData())
             );
         }
         $category->setTitle($form->get('title')->getData());
-        $category->setStateFlag($form->get('state_flag')->getData());
+        if (!$form->get('state_flag')->getData()) $category->setStateFlag(0);
+        else $category->setStateFlag(1);
         return $category;
     }
 
@@ -36,11 +37,34 @@ class CategoryGenerator
             $category->setParent(
                 $this->em
                     ->getRepository('CatalogBundle:Category')
-                    ->findOneBy(array('id' => $form->get('parent_category')->getData()))
+                    ->find($form->get('parent_category')->getData())
             );
         }
         $category->setTitle($form->get('title')->getData());
         $category->setStateFlag($form->get('state_flag')->getData());
         return $category;
+    }
+
+    public function getCrud()
+    {
+        $repo = $this->em->getRepository('CatalogBundle:Category');
+        $options = [
+            'decorate' => true,
+            'rootOpen' => '<ul>',
+            'rootClose' => '</ul>',
+            'childOpen' => '<li style="margin-bottom:15px;margin-top: 15px;">',
+            'childClose' => '</li>',
+            'nodeDecorator' => function ($node) {
+                return '<a href="/category/' . $node['id'] . '">' . $node['title'] . '</a>
+                <a href="/category/' . $node['id'] . '/edit"  class="btn btn-sm btn-primary">edit</a>
+                <a href="/category/' . $node['id'] . '/remove" class="btn btn-sm btn-danger">delete</a>';
+            }
+        ];
+        $htmlTree = $repo->childrenHierarchy(
+            null,
+            false,
+            $options
+        );
+        return $htmlTree;
     }
 }
