@@ -28,9 +28,9 @@
         $('#grid-table').gridPlugin({
             rootURL: 'http://localhost:8000/product/',
             ajaxURL: 'http://localhost:8000/product/ajax',
-            sortableColumns: ['name','id'],
-            filterableColumns: ['name','id'],
-            itemsPerPage: 5
+            sortableColumns: ['id','name','creationTime','lastModification'],
+            filterableColumns: ['id','name'],
+            itemsPerPage: 8
         });
     </script>
 {% endblock %}

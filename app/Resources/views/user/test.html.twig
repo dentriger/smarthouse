@@ -15,23 +15,23 @@
                 {{ htmlTree | raw }}
             </div>
         </div>
-        {#<div class="row" style="height: 50px;margin-top: -19px !important;#}
-{#margin-bottom: 10px !important;">#}
-            {#<form  class="form-inline" style="padding-top: 8px;padding-left: 5px" method="get">#}
-                {#<div class="form-group">#}
-                    {#<label for="per_page_input">Items per page: </label>#}
-                    {#<input type="text" value="8" name="per_page" class="form-control" id="per_page_input" placeholder="8">#}
-                {#</div>#}
-                {#<button type="submit" value="submit" class="btn btn-default">Go</button>#}
-                {#<div class="form-group" style="float: right;padding-right: 20px">#}
-                    {#<label for="">Sort by: </label>#}
-                    {#<button class="btn btn-default">{{ knp_pagination_sortable(pagination, '#', 'p.id') }}</button>#}
-                    {#<button class="btn btn-default">{{ knp_pagination_sortable(pagination, 'Name', 'p.name') }}</button>#}
-                    {#<button class="btn btn-default">{{ knp_pagination_sortable(pagination, 'CreationTime', 'p.creationTime') }}</button>#}
-                {#</div>#}
-            {#</form>#}
+        <div class="row" style="height: 50px;margin-top: -19px !important;
+margin-bottom: 10px !important;">
+            <form  class="form-inline" style="padding-top: 8px;padding-left: 5px" method="get">
+                <div class="form-group">
+                    <label for="per_page_input">Items per page: </label>
+                    <input type="text" name="per_page" class="form-control" id="per_page_input">
+                </div>
+                <button type="submit" value="submit" class="btn btn-default">Go</button>
+                <div class="form-group" style="float: right;padding-right: 20px">
+                    <label for="">Sort by: </label>
+                    <button class="btn btn-default">{{ knp_pagination_sortable(pagination, '#', 'p.id') }}</button>
+                    <button class="btn btn-default">{{ knp_pagination_sortable(pagination, 'Name', 'p.name') }}</button>
+                    <button class="btn btn-default">{{ knp_pagination_sortable(pagination, 'CreationTime', 'p.creationTime') }}</button>
+                </div>
+            </form>
 
-        {#</div>#}
+        </div>
         {% if pagination is defined %}
             <div>
                 {% for article in pagination %}
@@ -56,6 +56,6 @@
     </div>
 {% endblock %}
 
-{#{% block javascripts %}#}
-    {#<script src="{{ asset('bundles/catalog/js/menu/menu.js') }}"></script>#}
-{#{% endblock %}#}
+{% block javascripts %}
+    <script src="{{ asset('bundles/catalog/js/menu/menu.js') }}"></script>
+{% endblock %}
