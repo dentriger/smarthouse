@@ -1,16 +1,14 @@
 <?php
 namespace CatalogBundle\Form\Category;
 
-use CatalogBundle\Entity\Category;
+use CatalogBundle\Form\Type\CategoryType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use CatalogBundle\Form\Type\EditCategoryType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SubmitCategoryType extends AbstractType
+class UpdateCategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +19,7 @@ class SubmitCategoryType extends AbstractType
                     'style' => 'margin-bottom:15px;'
                 ]
             ])
-            ->add('parent_category', EditCategoryType::class, [
+            ->add('parent_category', CategoryType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'margin-bottom:15px'

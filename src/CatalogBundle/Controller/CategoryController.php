@@ -2,6 +2,7 @@
 namespace CatalogBundle\Controller;
 
 use CatalogBundle\Form\Category\SubmitCategoryType;
+use CatalogBundle\Form\Category\UpdateCategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +27,7 @@ class CategoryController extends Controller
         $form = $this->createForm(SubmitCategoryType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->getRepository('CatalogBundle:Category')->save(
                 $this
                     ->get('app.category_generator')
@@ -58,7 +59,7 @@ class CategoryController extends Controller
         $editable_category = $em
             ->getRepository('CatalogBundle:Category')
             ->find($id);
-        $form = $this->createForm(SubmitCategoryType::class);
+        $form = $this->createForm(UpdateCategoryType::class);
         $form->setData($editable_category->getCategoryDataToForm());
         $form->handleRequest($request);
 

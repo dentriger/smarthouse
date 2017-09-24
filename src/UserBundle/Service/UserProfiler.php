@@ -37,10 +37,15 @@ class UserProfiler
         return $user;
     }
 
-    public function setEncodePassword($user)
+    public function setEncodePassword($user,Form $form=null,$isNew = true)
     {
-        $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
-        $user->setPassword($password);
+        if($isNew){
+            $password = $this->passwordEncoder->encodePassword($user, $user->getPlainPassword());
+        }
+        else{
+            $password = $this->passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData());
+        }
+        return $user->setPassword($password);
     }
 
     public function generateToken(User $user,Tokens $token = null,$new = true)

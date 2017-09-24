@@ -12,30 +12,24 @@
     </div>
 
     <div class="testclass2">
-
-
-
         <div class="container" style="height: 100%; width: 100%;">
-            <div class="row" style="height: 50%; border:solid 4px #009090; border-radius:8px;color:black;overflow: hidden;">
-                <div class="col-md-4" style="height: 100%">
-                    <img src="{{ relative_path('/uploads/images/') }}{{ product.image }}"
-                         class="thumbnail" height="100%" width="100%" alt="">
+            <div class="col-md-4" style="height: 100%">
+                <img src="{{ relative_path('/uploads/images/') }}{{ product.image }}"
+                     class="thumbnail" width="300" alt="">
+            </div>
+            <div class="col-md-8" style="height: 100%">
+                <div class="row" style="height: 5%">
+                    <div class="col-md-12"><h4>Added: {{ product.creationTime | date  }}</h4></div>
                 </div>
-                <div class="col-md-8" style="height: 100%">
-                    <div class="row" style="height: 5%">
-                        <div class="col-md-12"><h4>Added: {{ product.creationTime | date  }}</h4></div>
-                    </div>
-                    <div class="row" style="height: 5%">
-                        <div class="col-md-3"><h4>State flag: {{ product.stateFlag }}</h4>  </div>
-                    </div>
-                    <div class="row" style="height: 10%">
-                        <div class="col-md-12"><h3>{{ product.name }}</h3></div>
-                    </div>
-                    <div class="row" style="height: 20%">
-                        <div class="col-md-12"><h4>{{ product.description }}</h4></div>
-                    </div>
+                <div class="row" style="height: 5%">
+                    <div class="col-md-3"><h4>State flag: {{ product.stateFlag }}</h4>  </div>
+                </div>
+                <div class="row" style="height: 10%">
+                    <div class="col-md-12"><h3>{{ product.name }}</h3></div>
+                </div>
+                <div class="row" style="height: 20%">
+                    <div class="col-md-12"><h4>{{ product.description }}</h4></div>
                 </div>
             </div>
-
-           </div>
+        </div>
 {% endblock %}

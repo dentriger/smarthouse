@@ -19,14 +19,17 @@ class ProductGenerator
     public function createProduct(Form $form)
     {
         $fileName = $form->get('image')->getData();
-        $file = md5(uniqid()).'.'.$fileName->guessExtension();
-
-        $fileName->move(
-            'uploads/images',
-            $file
-        );
         $now = new\DateTime('now');
         $product = new Product();
+
+        if (!is_null($fileName)) {
+            $file = md5(uniqid()) . '.' . $fileName->guessExtension();
+            $fileName->move(
+                'uploads/images',
+                $file
+            );
+            $product->setImage($file);
+        }
 
 //        $similar_product_id = $form->get('similar_products')->getData();
 //        if($similar_product_id!==NULL) {
@@ -51,7 +54,6 @@ class ProductGenerator
         $product->setSku($form->get('sku')->getData());
         $product->setCreationTime($now->format('Y-m-d H:i:s'));
         $product->setLastModification($now->format('Y-m-d H:i:s'));
-        $product->setImage($file);
         return $product;
     }
 

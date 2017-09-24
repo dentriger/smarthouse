@@ -110,9 +110,11 @@ class ProductController extends Controller
         $product = $em->getRepository('CatalogBundle:Product')->find($id);
         $image = $product->getImage();
         $em->getRepository('CatalogBundle:Product')->remove($product);
-        $this
-            ->get('app.product_generator')
-            ->removeImage($image);
+        if (!is_null($image)) {
+            $this
+                ->get('app.product_generator')
+                ->removeImage($image);
+        }
         return new Response();
     }
 

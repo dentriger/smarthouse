@@ -77,20 +77,23 @@ class ForgotPasswordController extends Controller
     /**
      * @Route("/newpassword{hash}", name="newpassword")
      */
-    public function newPasswordAction(Request $request,$hash)
+    public function newPasswordAction(Request $request, $hash)
     {
         $em = $this->getDoctrine()->getManager();
         $token = $em->getRepository(Tokens::class)->findOneBy(['token' => $hash]);
+
+
 
         if ($token) {
             $form = $this->createForm(NewPasswordForm::class);
 
             $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $user = $em->getRepository(User::class)->findOneBy(['id' => $token->getUserId()]);
+            if ($form->isSubmitted()) {
+                $user = $em->getRepository(User::class)->findOneBy(['id'=>$token->getUserId()]);
                 $em->getRepository(User::class)->saveUser(
-                    $this->userProfiler->setEncodePassword($user)
+                    $this->userProfiler->setEncodePassword($user,$form,false)
                 );
+
                 return $this->redirectToRoute('home');
             }
             return $this->render(
