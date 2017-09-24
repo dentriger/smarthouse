@@ -33,7 +33,7 @@ class CategoryGenerator
 
     public function updateCategory(Form $form, Category $category)
     {
-        if (!is_null($form->get('parent_category')->getData())) {
+        if (($form->get('parent_category')->getData())!==$category->getId()) {
             $category->setParent(
                 $this->em
                     ->getRepository('CatalogBundle:Category')

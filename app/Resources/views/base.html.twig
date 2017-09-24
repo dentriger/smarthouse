@@ -13,9 +13,77 @@
     <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('libs/bootstrap-3.3.7/js/bootstrap.js') }}"></script>
     <script src="{{ asset('bundles/catalog/js/grid_plugin.js') }}"></script>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('libs/css/style.css') }}">
+    <script src="{{ asset('libs/owl-carousel/owl.carousel.js') }}"></script>
+    <script src="{{ asset('libs/js/custom-js.js') }}"></script>
 </head>
 <body>
-{% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+
+<div class="container-fluid">
+    <header>
+        <div class="row header_row_1">
+            <div class="col-sm-3 header_left">
+                <div class="logo_main">
+                    <a href="/"><img src="{{ asset('images/logo.png') }}" alt=""></a>
+                </div>
+            </div>
+            <ul class="header_user">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out"></i>Logout</a></li>
+                    <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> {{ app.user.username }}</a></li>
+                {% else %}
+                    <li><a href="{{ path('login') }}"><i class="fa fa-user"></i>Sign in</a></li>
+                    <li><a href="{{ path('user_registration') }}"><i class="fa fa-plus" aria-hidden="true"></i>Create account</a></li>
+                {% endif %}
+            </ul>
+            {#<ul class="header_social">#}
+                {#<li><a href="#"><i class="fa fa-twitter"></i></a></li>#}
+                {#<li><a href="#"><i class="fa fa-facebook"></i></a></li>#}
+                {#<li><a href="#"><i class="fa fa-youtube"></i></a></li>#}
+                {#<li><a href="#"><i class="fa fa-instagram"></i></a></li>#}
+                {#<li><a href="#"><i class="fa fa-pinterest"></i></a></li>#}
+                {#<li><a href="#"><i class="fa fa-google-plus"></i></a></li>#}
+                {#<li><a href="#"><i class="fa fa-tumblr"></i></a></li>#}
+            {#</ul>#}
+            <div class="clearfix"></div>
+        </div>
+        {#<div class="row header_row__2">#}
+            {#<div class="col-sm-3 header_left">#}
+                {#<div class="logo_main">#}
+                    {#<a href="/"><img src="{{ asset('images/logo.png') }}" alt=""></a>#}
+                {#</div>#}
+            {#</div>#}
+
+            {#<div class="col-sm-6 header_center">#}
+                {#<div class="header_search">#}
+                    {#<form action="/search" method="get" class="search-form">#}
+                        {#<input id="search-field" name="q" type="text" placeholder="" class="hint" />#}
+                        {#<button id="search-submit" type="submit">Search</button>#}
+                    {#</form>#}
+                {#</div>#}
+            {#</div>#}
+
+            {#<div class="col-sm-3 header_right">#}
+                {#<div class="custom_header">#}
+                    {#<i class="fa fa-mobile"></i><span>888-5555-3333</span>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+        <div class="row header_row__3">
+            {{ include('menu/menubar.html.twig') }}
+        </div>
+    </header>
+    {% block body %}{% endblock %}
+    {#{% block footer %}#}
+    {#{% endblock %}#}
+</div>
+{% block javascripts %}
+{% endblock %}
 </body>
 </html>

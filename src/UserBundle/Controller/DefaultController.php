@@ -9,7 +9,7 @@ use UserBundle\Entity\User;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function indexAction()
     {

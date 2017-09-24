@@ -89,15 +89,15 @@ class ProductRepository extends EntityRepository
         }
         return $result;
     }
-//
-//    public function getAllIdNameProducts()
-//    {
-//        $products = $this->_em
-//            ->createQueryBuilder()
-//            ->select('p.id','p.name')
-//            ->from('CatalogBundle:Product', 'p')
-//            ->getQuery()
-//            ->getResult();
-//        return $products;
-//    }
+
+    public function getAllIdNameProducts()
+    {
+        $products = $this->_em
+            ->createQueryBuilder()
+            ->select('p.id','p.name')
+            ->from('CatalogBundle:Product', 'p')
+            ->getQuery()
+            ->getResult();
+        return $products;
+    }
 }

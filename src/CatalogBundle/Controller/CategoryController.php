@@ -2,6 +2,7 @@
 namespace CatalogBundle\Controller;
 
 use CatalogBundle\Form\Category\SubmitCategoryType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class CategoryController extends Controller
 {
     /**
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route(
      *     "/category/create",
      *     name="category_create"
@@ -41,6 +43,7 @@ class CategoryController extends Controller
     /**
      * @param $request
      * @param $id
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route(
      *     "/category/{id}/edit",
      *     requirements={"id" = "\d+"},
@@ -75,6 +78,7 @@ class CategoryController extends Controller
 
     /**
      * @param $request
+     * @Security("has_role('ROLE_USER')")
      * @Route(
      *     "/category/all",
      *     name="products_all"
@@ -97,6 +101,7 @@ class CategoryController extends Controller
     /**
      * @param $request
      * @param $id
+     * @Security("has_role('ROLE_USER')")
      * @Route(
      *     "/category/{id}",
      *     requirements={"id" = "\d+"},
@@ -118,6 +123,7 @@ class CategoryController extends Controller
     }
 
     /**
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route(
      *     "/category/crud",
      *     name="category_crud"
@@ -136,6 +142,7 @@ class CategoryController extends Controller
 
     /**
      * @param Post
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route(
      *     "/category/{id}/remove",
      *     requirements={"id" = "\d+"},

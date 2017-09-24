@@ -69,8 +69,9 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function __construct()
     {
-        $this->isActive = true;
-        $this->roles = array('ROLE_USER','ROLE_ADMIN');
+        $this->isActive = false;
+        $this->roles = array('ROLE_USER');
+        $this->forgivePassword = null;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -178,6 +179,19 @@ class User implements AdvancedUserInterface, \Serializable
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param string $isActive
+     *
+     * @return User
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+        return $this;
     }
 
     /**

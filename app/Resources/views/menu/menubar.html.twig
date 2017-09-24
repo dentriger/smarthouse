@@ -1,0 +1,29 @@
+<div class=" col-sm-12 ">
+    <div id="megamenu">
+        <ul class="sf-menu megamenu_desktop visible-lg">
+            <li class="megamenu_item_1">
+                <a href="{{ path('home') }}">Home</a>
+            </li>
+            <li class="megamenu_item_2">
+                <a href="{{ path('products_all') }}">Products</a>
+            </li>
+            <li class="megamenu_item_3">
+                <a href="#">Contact</a>
+            </li>
+
+            {% if is_granted('ROLE_MODERATOR') %}
+                <li><a href="{{ path('adminPanel') }}">Control Panel</a></li>
+            {% endif %}
+
+            {#{% if is_granted('ROLE_MODERATOR') %}#}
+                {#<li><a href="{{ path('product_crud') }}">Product CRUD</a></li>#}
+                {#<li><a href="{{ path('category_crud') }}">Category CRUD</a></li>#}
+            {#{% endif %}#}
+
+            {#{% if is_granted('ROLE_ADMIN') %}#}
+                {#<li><a href="{{ path('user_ajax') }}">User CRUD</a></li>#}
+            {#{% endif %}#}
+
+        </ul>
+    </div>
+</div>

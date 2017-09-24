@@ -1,6 +1,7 @@
 <?php
 namespace CatalogBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,6 +14,7 @@ class ProductController extends Controller
 {
     /**
      * @param Request $request
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/product/create", name="product_create")
      * @Method({"GET","POST"})
      * @return Response
@@ -39,6 +41,7 @@ class ProductController extends Controller
     /**
      * @param $request
      * @param $id
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route(
      *     "/product/{id}/edit",
      *     requirements={"id" = "\d+"},
@@ -73,6 +76,7 @@ class ProductController extends Controller
 
     /**
      * @param $id
+     * @Security("has_role('ROLE_USER')")
      * @Route(
      *     "/product/{id}",
      *     requirements={"id" = "\d+"},
@@ -91,6 +95,7 @@ class ProductController extends Controller
 
     /**
      * @param Post
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route(
      *     "/product/{id}/remove",
      *     requirements={"id" = "\d+"},
@@ -112,6 +117,7 @@ class ProductController extends Controller
     }
 
     /**
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/product/crud", name="product_crud")
      * @Method({"GET"})
      */
@@ -122,6 +128,7 @@ class ProductController extends Controller
 
     /**
      * @param $request
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/product/ajax", name="product_ajax")
      * @Method({"GET"})
      * @return Response
@@ -151,6 +158,7 @@ class ProductController extends Controller
 
     /**
      * @param $request
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Route("/product/ajax/count", name="product_count")
      * @Method({"GET"})
      * @return Response
