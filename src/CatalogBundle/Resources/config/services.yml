@@ -23,6 +23,12 @@ services:
         tags:
             - { name: form.type }
 
+    app.form.type.product_category:
+            class: CatalogBundle\Form\Type\ProductCategoryType
+            arguments: ["@doctrine.orm.entity_manager"]
+            tags:
+                - { name: form.type }
+
     app.form.type.product:
         class: CatalogBundle\Form\Type\ProductType
         arguments: ["@doctrine.orm.entity_manager"]

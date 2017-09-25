@@ -4,7 +4,7 @@ namespace CatalogBundle\Form\Product;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use CatalogBundle\Form\Type\CategoryType;
+use CatalogBundle\Form\Type\ProductCategoryType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -30,7 +30,7 @@ class SubmitProductType extends AbstractType
                     'style' => 'margin-bottom:15px;'
                 ]
             ])
-            ->add('category', CategoryType::class, [
+            ->add('category', ProductCategoryType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'style' => 'margin-bottom:15px'

@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UpdateCategoryType extends AbstractType
 {
@@ -42,4 +43,12 @@ class UpdateCategoryType extends AbstractType
                 ]
             ]);
     }
+
+//    public function setDefaultOptions(OptionsResolver $resolver)
+//    {
+//        $resolver->setRequired(array(
+//            'age'
+//        ));
+//
+//    }
 }

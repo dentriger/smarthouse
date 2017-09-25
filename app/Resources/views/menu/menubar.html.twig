@@ -12,17 +12,8 @@
             </li>
 
             {% if is_granted('ROLE_MODERATOR') %}
-                <li><a href="{{ path('adminPanel') }}">Control Panel</a></li>
+                <li><a href="{{ path('category_crud') }}">Control Panel</a></li>
             {% endif %}
-
-            {#{% if is_granted('ROLE_MODERATOR') %}#}
-                {#<li><a href="{{ path('product_crud') }}">Product CRUD</a></li>#}
-                {#<li><a href="{{ path('category_crud') }}">Category CRUD</a></li>#}
-            {#{% endif %}#}
-
-            {#{% if is_granted('ROLE_ADMIN') %}#}
-                {#<li><a href="{{ path('user_ajax') }}">User CRUD</a></li>#}
-            {#{% endif %}#}
 
         </ul>
     </div>

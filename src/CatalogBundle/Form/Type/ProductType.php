@@ -2,12 +2,10 @@
 
 namespace CatalogBundle\Form\Type;
 
-//use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-//use CatalogBundle\Entity\Product;
 
 class ProductType extends AbstractType
 {

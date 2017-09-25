@@ -13,6 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class CategoryController extends Controller
 {
     /**
+     * @param $request
      * @Security("has_role('ROLE_MODERATOR')")
      * @Route(
      *     "/category/create",
@@ -56,18 +57,18 @@ class CategoryController extends Controller
     public function editCategoryAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $editable_category = $em
+        $editableCategory = $em
             ->getRepository('CatalogBundle:Category')
             ->find($id);
         $form = $this->createForm(UpdateCategoryType::class);
-        $form->setData($editable_category->getCategoryDataToForm());
+        $form->setData($editableCategory->getCategoryDataToForm());
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $em->getRepository('CatalogBundle:Category')->save(
                 $this
                     ->get('app.category_generator')
-                    ->updateCategory($form, $editable_category)
+                    ->updateCategory($form, $editableCategory)
             );
             return $this->redirectToRoute('category_crud');
         }
@@ -89,11 +90,11 @@ class CategoryController extends Controller
      */
     public function getAllProductsAction(Request $request)
     {
-        $per_page = $request->get('per_page') ? $request->get('per_page') : 8;
+        $perPage = $request->get('per_page') ? $request->get('per_page') : 8;
         $paginator = $this->get('knp_paginator');
         $pagination = $this
             ->get('app.category_paginator_generator')
-            ->getPaginator($request, $paginator, 'all', $per_page);
+            ->getPaginator($request, $paginator, 'all', $perPage);
 
         $htmlTree = $this->get('app.category_menu_generator')->getMenu();
         return $this->render('user/test.html.twig', compact('htmlTree', 'pagination'));
@@ -113,11 +114,11 @@ class CategoryController extends Controller
      */
     public function getProductsByCategoryAction(Request $request, $id)
     {
-        $per_page = $request->get('per_page') ? $request->get('per_page') : 8;
+        $perPage = $request->get('per_page') ? $request->get('per_page') : 8;
         $paginator = $this->get('knp_paginator');
         $pagination = $this
             ->get('app.category_paginator_generator')
-            ->getPaginator($request, $paginator, $id, $per_page);
+            ->getPaginator($request, $paginator, $id, $perPage);
 
         $htmlTree = $this->get('app.category_menu_generator')->getMenu();
         return $this->render('user/test.html.twig', compact('htmlTree', 'pagination'));

@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid product">
+    <div class="row">
+    <div class="col-md-9 product-block">
+        <div class="col-md-4">
+            <img id="elevatezoom_big" src="{{ asset('images/phone.png') }}" alt="" data-zoom-image="" />
+        </div>
+
+        <div class="col-md-8">
+            <form action="/cart/add" method="post" enctype="multipart/form-data" id="product-actions">
+                <div class="product_info__wrapper">
+                    <div class="product_info__left">
+                        <div itemprop="name" class="product_name">{{ product.name }}</div>
+
+                        <div class="options clearfix">
+                            <div class="product_description">
+                                <h3 class="product_description__title">Description</h3>
+                                <div class="rte">
+                                    {{ product.description }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product_info__right">
+                            <div id="product_price">
+                                <p class="price product-price"><span class="money">$799</span></p>
+                                <p class="product_details__item" id="product_quantity"><label for="">Availability:</label> <span class="notify_danger">Unavailable</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table product-specs__table">
+                    <tbody>
+                    <tr class="product-specs__table-title">
+                        <td colspan="2">
+                            <div class="product-specs__table-title-inner">
+                                Общая информация
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Дата выхода</td>
+                        <td>2017 г. Февраль</td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr class="product-specs__table-title"></tr>
+                    <tr></tr>
+                    </tbody>
+                    <tbody>
+                    <tr class="product-specs__table-title"></tr>
+                    <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 product-block">
+        <div class="col-md-10 col-xs-12 shop-block">
+            <div class="col-md-5 col-xs-6 shop-disc">
+                <p class="price product-price"><span class="money"><i class="fa fa-usd" aria-hidden="true"></i>799</span></p>
+                <p class="phone"><span class="money"><i class="fa fa-phone-square" aria-hidden="true"></i>555-555-555</span></p>
+            </div>
+            <div class="col-md-5 col-xs-6 shop-img">
+                <img src="{{ asset('images/mobiline.gif') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-10 col-xs-12 shop-block">
+            <div class="col-md-5 col-xs-6 shop-disc">
+                <p class="price product-price"><span class="money"><i class="fa fa-usd" aria-hidden="true"></i>799</span></p>
+                <p class="phone"><span class="money"><i class="fa fa-phone-square" aria-hidden="true"></i>555-555-555</span></p>
+            </div>
+            <div class="col-md-5 col-xs-6 shop-img">
+                <img src="{{ asset('images/mobiline.gif') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-10 col-xs-12 shop-block">
+            <div class="col-md-5 col-xs-6 shop-disc">
+                <p class="price product-price"><span class="money"><i class="fa fa-usd" aria-hidden="true"></i>799</span></p>
+                <p class="phone"><span class="money"><i class="fa fa-phone-square" aria-hidden="true"></i>555-555-555</span></p>
+            </div>
+            <div class="col-md-5 col-xs-6  shop-img">
+                <img src="{{ asset('images/mobiline.gif') }}" alt="">
+            </div>
+        </div>
+        <div class="col-md-10 col-xs-12 shop-block">
+            <div class="col-md-5 col-xs-6  shop-disc">
+                <p class="price product-price"><span class="money"><i class="fa fa-usd" aria-hidden="true"></i>799</span></p>
+                <p class="phone"><span class="money"><i class="fa fa-phone-square" aria-hidden="true"></i>555-555-555</span></p>
+            </div>
+            <div class="col-md-5 col-xs-6 shop-img">
+                <img src="{{ asset('images/mobiline.gif') }}" alt="">
+            </div>
+        </div>
+    </div>
+    </div>
+</div><!-- /.product_wrap -->
+{% endblock %}

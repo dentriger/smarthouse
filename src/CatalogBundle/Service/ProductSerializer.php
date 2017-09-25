@@ -52,6 +52,7 @@ class ProductSerializer
             'products',
             'productDataToForm',
             'categoryDataToForm',
+            'category',
         ]);
 
         $serializer = new Serializer([$normalizer], [$encoder]);

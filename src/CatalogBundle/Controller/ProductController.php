@@ -53,18 +53,18 @@ class ProductController extends Controller
     public function editProductAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $editable_product = $em
+        $editableProduct = $em
             ->getRepository('CatalogBundle:Product')
             ->find($id);
         $form = $this->createForm(SubmitProductType::class);
-        $form->setData($editable_product->getProductDataToForm());
+        $form->setData($editableProduct->getProductDataToForm());
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             $em->getRepository('CatalogBundle:Product')->save(
                 $this
                     ->get('app.product_generator')
-                    ->updateProduct($form, $editable_product)
+                    ->updateProduct($form, $editableProduct)
             );
             return $this->redirectToRoute('product_crud');
         }
@@ -138,20 +138,20 @@ class ProductController extends Controller
     public function getProductsAjaxAction(Request $request)
     {
         $page = $request->get('page') ? $request->get('page') : 1;
-        $per_page = $request->get('per_page') ? $request->get('per_page') : 5;
-        $ordered_by = $request->get('ordered_by') ? $request->get('ordered_by') : 'id';
+        $perPage = $request->get('per_page') ? $request->get('per_page') : 5;
+        $orderedBy = $request->get('ordered_by') ? $request->get('ordered_by') : 'id';
         $direction = $request->get('direction') ? $request->get('direction') : 'DESC';
-        $filtered_by = $request->get('filtered_by') ? $request->get('filtered_by') : 'all';
+        $filteredBy = $request->get('filtered_by') ? $request->get('filtered_by') : 'all';
         $column = $request->get('column') ? $request->get('column') : 1;
 
         $result = $this
             ->get('app.product_serializer')
             ->serializeProducts(
                 $page,
-                $per_page,
-                $ordered_by,
+                $perPage,
+                $orderedBy,
                 $direction,
-                $filtered_by,
+                $filteredBy,
                 $column
             );
 
@@ -167,11 +167,11 @@ class ProductController extends Controller
      */
     public function getCountAction(Request $request)
     {
-        $filtered_by = $request->get('filtered_by') ? $request->get('filtered_by') : 'all';
+        $filteredBy = $request->get('filtered_by') ? $request->get('filtered_by') : 'all';
         $column = $request->get('column') ? $request->get('column') : 1;
         $result = $this->getDoctrine()->getManager()
             ->getRepository('CatalogBundle:Product')
-            ->getCount($filtered_by, $column);
+            ->getCount($filteredBy, $column);
 
         return new JsonResponse(array('count' => $result));
     }

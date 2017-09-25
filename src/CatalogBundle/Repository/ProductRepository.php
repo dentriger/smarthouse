@@ -69,14 +69,14 @@ class ProductRepository extends EntityRepository
         return $products;
     }
 
-    public function getCount($filtered_by, $column)
+    public function getCount($filteredBy, $column)
     {
-        if ($filtered_by !== 'all') {
+        if ($filteredBy !== 'all') {
             $result = $this->_em
                 ->createQueryBuilder()
                 ->select('COUNT(p)')
                 ->from('CatalogBundle:Product', 'p')
-                ->where('p.' . $filtered_by . '= :column')->setParameter(":column", $column)
+                ->where('p.' . $filteredBy . '= :column')->setParameter(":column", $column)
                 ->getQuery()
                 ->getSingleScalarResult();
         }else{
